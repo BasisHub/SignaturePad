@@ -1,0 +1,25 @@
+REM /**
+REM  * Sample.bbj
+REM  * @author mneu
+REM  */
+
+use net.seabears.signature.JsonToImageConverter
+use net.seabears.signature.FileReader
+use net.seabears.signature.Format
+
+declare JsonToImageConverter converter!
+converter! = new JsonToImageConverter()
+declare FileReader fileReader!
+fileReader! = new FileReader()
+declare String s!
+s! = fileReader!.readFile("C:/some_path/2.txt")
+
+declare String imageString!
+
+REM config with default stroke width of 1px and directory path where the image should be created
+imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", "C:/some_path/")
+
+REM config with stroke width of 3px and directory path where the image should be created
+imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", 3, "C:/some_path/")
+
+REM do stuff with the image string

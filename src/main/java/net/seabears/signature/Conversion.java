@@ -1,6 +1,7 @@
 package net.seabears.signature;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.util.LinkedList;
@@ -92,6 +93,8 @@ class Conversion {
         g.setBackground(config.getBackground());
         g.clearRect(0, 0, image.getWidth(), image.getHeight());
         g.setColor(config.getForeground());
+        g.setStroke(config.getStroke());
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     }
 
     private void drawCurves() {

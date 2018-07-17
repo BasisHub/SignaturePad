@@ -1,5 +1,6 @@
 package net.seabears.signature;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 
 /**
@@ -13,6 +14,7 @@ public class Config {
         private Color background = Color.WHITE;
         private Color foreground = Color.BLACK;
         private int padding = 0;
+        private BasicStroke stroke = new BasicStroke(1);
 
         private Builder() {
         }
@@ -49,6 +51,18 @@ public class Config {
             this.padding = paddingSize;
             return this;
         }
+        
+        /**
+         * Sets the padding in pixels to be used.
+         * @param paddingSize padding in pixels
+         * @return this instance
+         * @see Config#getPadding()
+         */
+        public Builder withStroke(final int strokeWidth) {
+        	this.padding = Math.round(stroke.getLineWidth()/2);
+            this.stroke = new BasicStroke(strokeWidth);
+            return this;
+        }
 
         /**
          * Creates a new configuration from this instance.
@@ -67,11 +81,13 @@ public class Config {
     private final Color background;
     private final Color foreground;
     private final int padding;
+    private final BasicStroke stroke;
 
-    private Config(final Builder builder) {
+    public Config(final Builder builder) {
         this.background = builder.background;
         this.foreground = builder.foreground;
         this.padding = builder.padding;
+        this.stroke = builder.stroke;
     }
 
     /**
@@ -101,6 +117,15 @@ public class Config {
      */
     public int getPadding() {
         return padding;
+    }
+    
+    /**
+     * Returns the configured stroke width.
+     * The default stroke width is 1.
+     * @return stroke width
+     */
+    public BasicStroke getStroke() {
+        return stroke;
     }
 
     /**
