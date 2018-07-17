@@ -14,15 +14,6 @@ public class JsonToImageConverter {
         public byte[] data;
     }
     
-//  test
-    public static void main(final String[] args) throws IOException {
-	  	JsonToImageConverter mc = new JsonToImageConverter();
-//	  	String ev = mc.readFile("2.txt");
-	  	FileReader fileReader = new FileReader();
-	  	String ev = fileReader.readFile("2.txt");
-	  	System.out.print(mc.jsonDataToImage(ev, Format.POINTS_LITTLE_ENDIAN, "png"));
-    }
-    
     /**
      * Builds an image from the specified data of the json string
      * 
