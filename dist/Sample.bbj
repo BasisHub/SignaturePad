@@ -6,6 +6,7 @@ REM  */
 use net.seabears.signature.JsonToImageConverter
 use net.seabears.signature.FileReader
 use net.seabears.signature.Format
+use java.util.Base64
 
 path$="d:/github/signaturepad/dist/"
 
@@ -14,24 +15,24 @@ converter! = new JsonToImageConverter()
 declare FileReader fileReader!
 fileReader! = new FileReader()
 declare String s!
-s! = fileReader!.readFile(path$+"sample.txt")
+s! = fileReader!.readFile(path$+"sample.json")
 
 declare String imageString!
 
 REM config with default stroke width of 1px and directory path where the image should be created
-imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", path$)
+imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png")
 
 ch=unt
 OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_thin.png"
-print(ch)str(imageString!),
+print(ch) Base64.getDecoder().decode(imageString!)
 close (ch)
 
 REM config with stroke width of 3px and directory path where the image should be created
-imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", 3, path$)
+imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", 3)
 
 ch=unt
 OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_bold.png"
-print(ch)str(imageString!),
+print(ch) Base64.getDecoder().decode(imageString!)
 close (ch)
 
 release

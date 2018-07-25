@@ -53,7 +53,7 @@ public class Config {
         }
         
         /**
-         * Sets the padding in pixels to be used.
+         * Sets the stroke width.
          * @param paddingSize padding in pixels
          * @return this instance
          * @see Config#getPadding()
