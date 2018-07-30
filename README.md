@@ -1,3 +1,43 @@
+# a BBj wrapper for converting Vantiv signature hardware input to PNG files in BBj
+
+
+Installation:
+
+
+1. copy the files from the "dist" folder into your application
+2. add SignaturePad.jar to your BBj Classpath
+3. add SignaturePad.bbj to your PREFIX
+4. look at Sample.bbj to learn about
+
+### Usage
+
+```
+use ::SignaturePad.bbj::SignaturePad
+
+path$="d:/github/signaturepad/dist/"
+file$=path$+"sample.json"
+
+png$ = SignaturePad.getSignatureAsPng(file$)
+ch=unt
+OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_thin.png"
+print(ch) png$
+close (ch)
+
+png$ = SignaturePad.getSignatureAsPng(file$,3)
+ch=unt
+OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_thick.png"
+print(ch) png$
+close (ch)
+
+release
+```
+
+
+Make sure to add the license credits with your BBj app.
+
+Credits belong to:
+
+
 # john-hancock
 
 Builds images from common customer signature serialization formats
