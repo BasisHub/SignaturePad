@@ -1,6 +1,7 @@
 use ::SignaturePad.bbj::SignaturePad
 
-file$="d:/github/signaturepad/dist/sample.json"
+path$="d:/github/signaturepad/dist/"
+file$=path$+"sample.json"
 
 png$ = SignaturePad.getSignatureAsPng(file$)
 ch=unt
