@@ -1,0 +1,28 @@
+use net.seabears.signature.JsonToImageConverter
+use net.seabears.signature.FileReader
+use net.seabears.signature.Format
+use java.util.Base64
+
+class public SignaturePad
+
+    method public static BBjString getSignatureAsPng(BBjString filepath$)
+        methodret #getSignatureAsPng(filepath$, 1)
+    methodend
+
+    method public static BBjString getSignatureAsPng(BBjString filepath$, BBjNumber Thickness)
+    
+        declare JsonToImageConverter converter!
+        converter! = new JsonToImageConverter()
+        declare FileReader fileReader!
+        fileReader! = new FileReader()
+        declare String s!
+        s! = fileReader!.readFile(filepath$)
+        
+        declare String imageString!
+        imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", Thickness)
+        
+        methodret Base64.getDecoder().decode(imageString!)
+    
+    methodend
+
+classend

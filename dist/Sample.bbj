@@ -1,38 +1,17 @@
-REM /**
-REM  * Sample.bbj
-REM  * @author mneu
-REM  */
+use ::SignaturePad.bbj::SignaturePad
 
-use net.seabears.signature.JsonToImageConverter
-use net.seabears.signature.FileReader
-use net.seabears.signature.Format
-use java.util.Base64
+file$="d:/github/signaturepad/dist/sample.json"
 
-path$="d:/github/signaturepad/dist/"
-
-declare JsonToImageConverter converter!
-converter! = new JsonToImageConverter()
-declare FileReader fileReader!
-fileReader! = new FileReader()
-declare String s!
-s! = fileReader!.readFile(path$+"sample.json")
-
-declare String imageString!
-
-REM config with default stroke width of 1px and directory path where the image should be created
-imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png")
-
+png$ = SignaturePad.getSignatureAsPng(file$)
 ch=unt
 OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_thin.png"
-print(ch) Base64.getDecoder().decode(imageString!)
+print(ch) png$
 close (ch)
 
-REM config with stroke width of 3px and directory path where the image should be created
-imageString! = converter!.jsonDataToImage(s!, Format.POINTS_LITTLE_ENDIAN, "png", 3)
-
+png$ = SignaturePad.getSignatureAsPng(file$,3)
 ch=unt
-OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_bold.png"
-print(ch) Base64.getDecoder().decode(imageString!)
+OPEN (CH,mode="O_TRUNC,O_CREATE")path$+"sig_thick.png"
+print(ch) png$
 close (ch)
 
 release
